@@ -3,6 +3,7 @@
 @e2e
 功能: 支持 SSO 模式部署 harbor
 
+    @e2e
     @automated
     @priority-high
     @harbor-chart-deploy-sso

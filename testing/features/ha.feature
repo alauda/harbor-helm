@@ -2,7 +2,7 @@
 @harbor-chart-deploy
 功能: 支持高可用模式部署 harbor
 
-    @smoke
+    @e2e
     @automated
     @priority-high
     @harbor-chart-deploy-ha

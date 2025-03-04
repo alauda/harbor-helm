@@ -33,8 +33,6 @@ echo "Harbor scheme: ${HARBOR_HOST_SCHEMA}"
 echo "Docker options: ${DOCKER_OPTS}"
 echo "Exclude tags: ${EXCLUDE_TAGS}"
 
-
-
 docker run ${DOCKER_OPTS} -i --privileged \
   -e HARBOR_PASSWORD="${HARBOR_PASSWORD}" \
   -e HARBOR_HOST_SCHEMA="${HARBOR_HOST_SCHEMA}" \
