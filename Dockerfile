@@ -45,7 +45,7 @@ COPY --from=builder /tools/bin /tools/bin
 COPY --from=builder /go/bin/playwright /tools/bin/playwright
 
 # install playwright dependencies
-RUN apt-get update && apt-get install -y ca-certificates tzdata bash locales make\
+RUN apt-get update && apt-get install -y ca-certificates tzdata bash locales make git\
     && /tools/bin/playwright install chromium --with-deps \
     && rm -rf /var/lib/apt/lists/* \
     && locale-gen en_US.UTF-8 \
