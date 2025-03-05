@@ -6,6 +6,7 @@ RUN mkdir -p /tools/bin
 ARG YQ_VERSION=4.25.2
 ARG KUBECTL_VERSION=1.28.2
 ARG HELM_VERSION=3.12.3
+ARG DOCKER_VERSION=26.0.2
 
 RUN set -eux; \
     if [ "$(arch)" = "arm64" ] || [ "$(arch)" = "aarch64" ]; then \
@@ -16,6 +17,8 @@ RUN set -eux; \
     export ARCH_ALIAS="x86_64"; \
     fi; \
     mkdir -p tmp; \
+    curl -fsSLO https://download.docker.com/linux/static/stable/$(arch)/docker-${DOCKER_VERSION}.tgz && \
+    tar xzvf docker-${DOCKER_VERSION}.tgz --strip 1 -C ./bin docker/docker && \
     curl -sfL https://github.com/mikefarah/yq/releases/download/v${YQ_VERSION}/yq_linux_${ARCH} -o ./bin/yq && \
     curl -sfL https://dl.k8s.io/release/v${KUBECTL_VERSION}/bin/linux/${ARCH}/kubectl -o ./bin/kubectl && \
     curl -sfL https://get.helm.sh/helm-v${HELM_VERSION}-linux-${ARCH}.tar.gz | tar xzf - -C tmp 2>&1 && mv tmp/linux-${ARCH}/helm ./bin && \
