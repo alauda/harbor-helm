@@ -37,4 +37,4 @@
             | StatefulSet | apps/v1    | harbor-ha-trivy      | $.spec.replicas | 2     |
         并且 执行 "harbor 官方 e2e" 脚本成功
             | command                                                                                                                                      |
-            | bash ./testdata/script/run-harbor-e2e.sh http test-ingress-ha.example.com Harbor12345 --add-host=test-ingress-http.example.com=<ingress-ip>  |
+            | bash ./testdata/script/run-harbor-e2e.sh http test-ingress-ha.example.com Harbor12345 harbor-ha --add-host=test-ingress-ha.example.com:<ingress-ip>  |
