@@ -38,11 +38,26 @@ spec:
     - name: context
       value: "."
 
+    - name: prepare-command
+      value: |
+        set -x
+        source_branch="{{ source_branch }}"
+        custom_file_path=".git/trigger-pipeline/params.yaml"
+        mkdir -p "$(dirname ${custom_file_path})"
+
+        # Currently, artifacts starting with “alauda”
+        # are pushed to the main branch of the artifact repository.
+        if [[ ${source_branch} =~ ^alauda- ]]; then
+            echo -n "branch-name: main" > ${custom_file_path}
+        else
+            echo -n "branch-name: ${source_branch}" > ${custom_file_path}
+        fi
+        echo "Defined custom params in ${custom_file_path}:"
+        cat ${custom_file_path}
     - name: upstreams
       value:
         - |
           repo-url: https://github.com/AlaudaDevops/devops-artifact.git
-          branch-name: {{ source_branch }}
           yaml-file-path: ./values.yaml
     - name: upstream-branch-condition
       value: "^(main|master|release-.*|alauda-.*)$"
